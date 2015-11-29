@@ -1,0 +1,16 @@
+# Ignore everything in .idea
+.idea
+
+*.pyo
+*.pyc
+.sass-cache/
+npm-debug.log
+
+node_modules/
+venv/
+
+vorgupraxkaxpraxkax/settings/local.py
+vorgupraxkaxpraxkax/db.sqlite3
+vorgupraxkaxpraxkax/assets/
+vorgupraxkaxpraxkax/media/
+vorgupraxkaxpraxkax/static/bower_components/

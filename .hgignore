@@ -1,0 +1,18 @@
+syntax: re
+
+# Ignore everything in .idea but the project's .iml file and runConfigurations/ subdirectory
+^\.idea/(?!(vorgupraxkaxpraxkax\.iml$|runConfigurations))
+
+
+syntax: glob
+
+*.pyc
+.sass-cache/
+
+venv/
+
+vorgupraxkaxpraxkax/settings/local.py
+vorgupraxkaxpraxkax/db.sqlite3
+vorgupraxkaxpraxkax/assets/
+vorgupraxkaxpraxkax/media/
+vorgupraxkaxpraxkax/static/bower_components/
