@@ -22,10 +22,17 @@
 <body class="{% block body_classes %}{% endblock %}">
     <header class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">vorgupraxkaxpraxkax</a>
+{#            <a class="navbar-brand" href="{% url 'home' %}">vorgupraxkaxpraxkax</a>#}
             <ul class="nav navbar-nav navbar-right">
-                {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Log out</a></li>
+{#                {% if request.user.is_authenticated %}#}
+{#                    <li><a href="{% url 'logout' %}">Log out</a></li>#}
+{#                {% else %}#}
+{#                    <li><a href="{% url 'login' %}">Log in</a></li>#}
+{#                {% endif %}#}
+
+                {% if user and not user.is_anonymous %}
+                  <li><a>Hello, {{ user.get_full_name }}!</a></li>
+                  <li><a href="{% url 'logout' %}">Log out</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Log in</a></li>
                 {% endif %}

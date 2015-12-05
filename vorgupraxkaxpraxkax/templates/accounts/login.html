@@ -6,5 +6,12 @@
 {% block content %}
     {% crispy form %}
 
+    <div class="social-login">
+        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="btn btn-primary">Login with facebook</a>
+    </div>
+
     <a href="{% url 'password_reset' %}">Forgot your password?</a>
+
+
+
 {% endblock %}

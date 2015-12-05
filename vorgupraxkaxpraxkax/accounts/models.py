@@ -14,8 +14,8 @@ class UserManager(BaseUserManager):
         Creates and saves a User with the given username, email and password.
         """
         now = timezone.now()
-        if not email:
-            raise ValueError('The given email must be set')
+        # if not email:
+        #     raise ValueError('The given email must be set')
         email = self.normalize_email(email)
         user = self.model(email=email,
                           is_staff=is_staff, is_active=True,
@@ -42,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField('active', default=True)
     date_joined = models.DateTimeField('date joined', default=timezone.now)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'name'
 
     objects = UserManager()
 

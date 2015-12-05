@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
 
     'crispy_forms',
     'compressor',
@@ -62,7 +63,17 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 TEMPLATE_LOADERS = [
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
@@ -202,3 +213,9 @@ LOGGING = {
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
+
+SOCIAL_AUTH_FACEBOOK_KEY = '688420341293230'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'b21b92c2d10bd2ba3441295a5f8ad7e0'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
+SOCIAL_AUTH_LOGIN_URL = '/'
