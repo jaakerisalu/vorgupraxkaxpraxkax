@@ -2,15 +2,20 @@
 
 {% load crispy_forms_tags %}
 
+{% if user and not user.is_anonymous %}
+
+{% endif %}
+
 
 {% block content %}
-    {% crispy form %}
 
     <div class="social-login">
         <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="btn btn-primary">Login with facebook</a>
 
         <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-danger">Login with google</a>
     </div>
+
+    {% crispy form %}
 
     <a href="{% url 'password_reset' %}">Forgot your password?</a>
 
