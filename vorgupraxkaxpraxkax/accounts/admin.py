@@ -5,13 +5,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from accounts.models import *
 
+from accounts.models import User
+
+
 class UserChangeForm(auth_forms.UserChangeForm):
     # Hackish variant of builtin UserChangeForm with no username
     def __init__(self, *args, **kwargs):
         super(UserChangeForm, self).__init__(*args, **kwargs)
-
-        if 'username' in self.fields:
-            del self.fields['username']
 
 
 class UserCreationForm(auth_forms.UserCreationForm):
@@ -23,14 +23,12 @@ class UserCreationForm(auth_forms.UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
 
-        if 'username' in self.fields:
-            del self.fields['username']
-
 
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('name',)}),
+        (_('Personal info'), {'fields': ('username', 'first_name', 'last_name',
+                                         'gender', 'birthday', 'email', 'avatar_url')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
@@ -41,8 +39,8 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('email', 'password1', 'password2')}
         ),
     )
-    list_display = ('id', 'email', 'name', 'is_staff')
-    search_fields = ('email', 'name')
+    list_display = ('id', 'email', 'username', 'is_staff')
+    search_fields = ('email', 'username')
     ordering = ('email',)
 
     form = UserChangeForm

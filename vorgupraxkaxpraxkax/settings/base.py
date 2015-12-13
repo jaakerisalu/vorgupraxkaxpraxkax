@@ -222,3 +222,27 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'oJ15PRZnt0JXKr53upjy6OYv'
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
 SOCIAL_AUTH_LOGIN_URL = '/'
+
+# SOCIAL_AUTH_FACEBOOK_SCOPE = [
+#     'email',
+#     # 'first_name',
+#     # 'last_name',
+#     # 'username',
+# ]
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.mail.mail_validation',
+    'social.pipeline.social_auth.associate_by_email',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+
+    'utils.pipeline.get_avatar_url',
+)

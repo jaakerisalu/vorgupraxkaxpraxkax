@@ -22,19 +22,20 @@
 <body class="{% block body_classes %}{% endblock %}">
     <header class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="container">
-{#            <a class="navbar-brand" href="{% url 'home' %}">vorgupraxkaxpraxkax</a>#}
             <ul class="nav navbar-nav navbar-right">
-{#                {% if request.user.is_authenticated %}#}
-{#                    <li><a href="{% url 'logout' %}">Log out</a></li>#}
-{#                {% else %}#}
-{#                    <li><a href="{% url 'login' %}">Log in</a></li>#}
-{#                {% endif %}#}
-
+                <li class="header-text">
                 {% if user and not user.is_anonymous %}
-                  <li><a>Hello, {{ user.get_full_name }}!</a></li>
-                  <li><a href="{% url 'logout' %}">Log out</a></li>
+                    <a>Hello, {{ user.first_name}}!</a>
+                    <a href="{% url 'logout' %}">Log out</a></li>
+                <li><div class="user-image" style="background-image: url(
+                        {% if user.avatar_url|length > 0 %}
+                            '{{ user.avatar_url }}')">
+                        {% else %}
+                            '../static/images/default-user-image.png')">
+                        {% endif %}
+                </div></li>
                 {% else %}
-                    <li><a href="{% url 'login' %}">Log in</a></li>
+                    <a href="{% url 'login' %}">Log in</a></li>
                 {% endif %}
             </ul>
         </div>
