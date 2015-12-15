@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic.base import TemplateView
 
+from vorgupraxkaxpraxkax.views import ApiView
 
 admin.autodiscover()
 
@@ -13,5 +14,7 @@ urlpatterns = [
 
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
+
+    url(r'^api/$', ApiView.as_view(), name='api')
 
 ]

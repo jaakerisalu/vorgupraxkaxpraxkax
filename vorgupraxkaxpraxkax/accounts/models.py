@@ -64,6 +64,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __unicode__(self):
         return self.username
 
+    def serialize(self):
+        return {
+            'first_name': str(self.first_name),
+            'last_name': str(self.last_name),
+            'personal_code': str(self.personal_code),
+        }
+
     def save(self, *args, **kwargs):
         """ ensure instance has usable password when created """
         if not self.pk and self.has_usable_password() is False:
