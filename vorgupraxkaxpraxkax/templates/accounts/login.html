@@ -9,16 +9,16 @@
 
 {% block content %}
 
-    <div class="social-login">
-        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="btn btn-primary">Login with facebook</a>
+    <div class="login-form">
+        <a href="#" class="btn btn-default social-button">ID card</a>
+        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="btn btn-primary social-button">Facebook</a>
+        <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-danger social-button">Google</a>
 
-        <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-danger">Login with google</a>
+
+{#    {% crispy form %}#}
+{##}
+{#    <a href="{% url 'password_reset' %}">Forgot your password?</a>#}
     </div>
-
-    {% crispy form %}
-
-    <a href="{% url 'password_reset' %}">Forgot your password?</a>
-
 
 
 {% endblock %}
