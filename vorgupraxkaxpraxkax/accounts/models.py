@@ -11,7 +11,7 @@ class UserManager(BaseUserManager):
     # Mostly copied from django.contrib.auth.models.UserManager
 
     def _create_user(self, username, email, password,
-             is_staff, is_superuser, **extra_fields):
+                     is_staff, is_superuser, **extra_fields):
         """
         Creates and saves a User with the given username, email and password.
         """
@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
             raise ValueError('The given username must be set')
         email = self.normalize_email(email)
         user = self.model(username=username, email=email,
-                          is_staff=is_staff, is_active=True, last_login=now,
+                          is_staff=is_staff, is_superuser=is_superuser, is_active=True, last_login=now,
                           date_joined=now, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -36,30 +36,22 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-
-    class Gender():
-        MALE = 0
-        FEMALE = 1
-        UNKNOWN = 2
-        CHOICES = [(MALE, 'Male'), (FEMALE, 'Female'), (UNKNOWN, 'Unknown')]
-
     username = models.CharField(_('username'), max_length=30, unique=True,
-        help_text=_('Required. 30 characters or fewer. Letters, digits and '
-                    '@/./+/-/_ only.'),
-        validators=[
-            validators.RegexValidator(r'^[\w.@+-]+$', _('Enter a valid username.'), 'invalid')
-        ])
+                                help_text=_('Required. 30 characters or fewer. Letters, digits and '
+                                            '@/./+/-/_ only.'),
+                                validators=[
+                                    validators.RegexValidator(r'^[\w.@+-]+$', _('Enter a valid username.'), 'invalid')
+                                ])
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
     email = models.EmailField(blank=True)
 
-    gender = models.IntegerField(choices=Gender.CHOICES, default=Gender.UNKNOWN)
-    birthday = models.DateField(default=timezone.now)
+    personal_code = models.CharField(max_length=30, blank=True)
+
     facebook_id = models.CharField(max_length=30, blank=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
-    objects = UserManager()
 
     is_staff = models.BooleanField('staff status', default=False)
     is_active = models.BooleanField('active', default=True)
